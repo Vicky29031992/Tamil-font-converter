@@ -508,6 +508,12 @@ const baseMappings = {
 
 let mappings = {};
 
+const LS_KEYS = {
+  inputEncoding: 'tamilConverter_inputEncoding',
+  outputEncoding: 'tamilConverter_outputEncoding',
+  inputText: 'tamilConverter_inputText'
+};
+
 function currentIds() {
   const mobile = window.matchMedia('(orientation: portrait)').matches;
   return mobile ? {
@@ -710,6 +716,7 @@ function doFontConversion() {
   if (inputEncoding === outputEncoding) {
     ui.outputText.value = inputText;
     syncState(ui);
+    saveState(); // save on every change
     return;
   }
 
@@ -717,6 +724,7 @@ function doFontConversion() {
   if (!mapping || Object.keys(mapping).length === 0) {
     ui.outputText.value = inputText;
     syncState(ui);
+    saveState();
     return;
   }
 
@@ -724,11 +732,13 @@ function doFontConversion() {
   if (!pattern) {
     ui.outputText.value = inputText;
     syncState(ui);
+    saveState();
     return;
   }
 
   ui.outputText.value = inputText.replace(pattern, match => mapping[match] || match);
   syncState(ui);
+  saveState();
 }
 
 function updateInputFont() {
@@ -736,6 +746,7 @@ function updateInputFont() {
   fonts.forEach(font => ui.inputText.classList.remove(`font-${font.id}`));
   ui.inputText.classList.add(`font-${ui.inputEncoding.value}`);
   doFontConversion();
+  saveState(); // save encoding change
 }
 
 function updateOutputFont() {
@@ -743,6 +754,7 @@ function updateOutputFont() {
   fonts.forEach(font => ui.outputText.classList.remove(`font-${font.id}`));
   ui.outputText.classList.add(`font-${ui.outputEncoding.value}`);
   doFontConversion();
+  saveState(); // save encoding change
 }
 
 function copyConverted() {
@@ -758,6 +770,7 @@ function clearInputText() {
   ui.inputText.value = '';
   ui.outputText.value = '';
   syncState(ui);
+  saveState();
 }
 
 function attachEvents(prefix = '') {
@@ -777,6 +790,57 @@ function attachEvents(prefix = '') {
   });
 }
 
+// ---------- localStorage persistence ----------
+
+function saveState() {
+  try {
+    const ui = getCurrentSet();
+    localStorage.setItem(LS_KEYS.inputEncoding, ui.inputEncoding.value);
+    localStorage.setItem(LS_KEYS.outputEncoding, ui.outputEncoding.value);
+    localStorage.setItem(LS_KEYS.inputText, ui.inputText.value);
+  } catch (e) {
+    // ignore storage errors
+  }
+}
+
+function loadState() {
+  try {
+    const savedInputEncoding = localStorage.getItem(LS_KEYS.inputEncoding);
+    const savedOutputEncoding = localStorage.getItem(LS_KEYS.outputEncoding);
+    const savedInputText = localStorage.getItem(LS_KEYS.inputText);
+
+    const desktop = {
+      inputText: document.getElementById('input-text'),
+      outputText: document.getElementById('output-text'),
+      inputEncoding: document.getElementById('input-encoding'),
+      outputEncoding: document.getElementById('output-encoding')
+    };
+    const mobile = {
+      inputText: document.getElementById('input-text-mobile'),
+      outputText: document.getElementById('output-text-mobile'),
+      inputEncoding: document.getElementById('input-encoding-mobile'),
+      outputEncoding: document.getElementById('output-encoding-mobile')
+    };
+
+    if (savedInputEncoding) {
+      desktop.inputEncoding.value = savedInputEncoding;
+      mobile.inputEncoding.value = savedInputEncoding;
+    }
+    if (savedOutputEncoding) {
+      desktop.outputEncoding.value = savedOutputEncoding;
+      mobile.outputEncoding.value = savedOutputEncoding;
+    }
+    if (savedInputText) {
+      desktop.inputText.value = savedInputText;
+      mobile.inputText.value = savedInputText;
+    }
+  } catch (e) {
+    // ignore storage errors
+  }
+}
+
+// ---------- init ----------
+
 window.onload = function() {
   generateFontStyles();
   populateEncodingSelects();
@@ -784,7 +848,7 @@ window.onload = function() {
   attachEvents();
   attachEvents('mobile');
 
-  // Set default encodings
+  // Set default encodings (will be overridden by saved state if present)
   document.getElementById('input-encoding').value = 'unicode';
   document.getElementById('output-encoding').value = 'bamini';
   document.getElementById('input-encoding-mobile').value = 'unicode';
@@ -801,7 +865,10 @@ window.onload = function() {
   document.getElementById('input-text-mobile').style.fontSize = '15px';
   document.getElementById('output-text-mobile').style.fontSize = '15px';
 
-  // Ensure font classes are applied even when input is empty
+  // Load previously saved text and encodings (including Vanavil)
+  loadState();
+
+  // Apply fonts and run initial conversion with loaded values
   updateInputFont();
   updateOutputFont();
 
