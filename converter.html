@@ -26,6 +26,8 @@
     width: 100vw;
     height: 100dvh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .desktop-view,
@@ -33,20 +35,22 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .desktop-view {
     display: none;
     padding: 10px;
     font-size: 12px;
-    flex-direction: column;
     gap: 10px;
   }
 
   .desktop-view h2 {
     color: #4b0082;
     text-align: center;
-    margin: 4px 0 0 0;
+    margin: 0 0 8px 0;
   }
 
   .desktop-view label,
@@ -145,17 +149,16 @@
   }
 
   .mobile-view {
-    display: block;
+    display: flex;
     padding: 10px;
     font-size: 14px;
-    flex-direction: column;
     gap: 10px;
   }
 
   .mobile-view h2 {
     color: #4b0082;
     text-align: center;
-    margin: 4px 0 4px 0;
+    margin: 0 0 8px 0;
     font-size: 20px;
     line-height: 1.1;
     flex: 0 0 auto;
@@ -267,6 +270,33 @@
     min-height: 24px;
   }
 
+  /* Back Button - Above the title */
+  .back-button-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 16px;
+    margin: 0;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .back-btn {
+    background: #6a0dad;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s ease;
+  }
+
+  .back-btn:hover {
+    background: #5a0080;
+  }
+
   @media (orientation: landscape) {
     .desktop-view { display: flex; }
     .mobile-view { display: none; }
@@ -284,7 +314,7 @@
 
     .mobile-view h2 {
       font-size: 18px;
-      margin: 2px 0 4px 0;
+      margin: 0 0 8px 0;
     }
 
     .mobile-view .top-row {
@@ -301,6 +331,15 @@
       width: 100%;
       align-self: center;
       padding: 10px 20px;
+    }
+
+    .back-button-container {
+      padding: 0 12px;
+    }
+
+    .back-btn {
+      font-size: 11px;
+      padding: 5px 12px;
     }
   }
 
@@ -327,12 +366,21 @@
     .mobile-view .font-label {
       font-size: 12px;
     }
+
+    .back-button-container {
+      padding: 0 10px;
+    }
   }
 </style>
 </head>
 <body>
 <div class="app-shell">
   <div class="desktop-view">
+    <!-- Back Button - Above the title -->
+    <div class="back-button-container">
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+    
     <h2>Tamil Font Converter</h2>
 
     <div class="container">
@@ -403,10 +451,15 @@
       </div>
     </div>
 
-	<div class="note">For Queries whatsapp: 8015233838</div>
+<div class="note">For Queries whatsapp: 8015233838</div>
   </div>
 
   <div class="mobile-view">
+    <!-- Back Button - Above the title -->
+    <div class="back-button-container">
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+    
     <h2>Tamil Font Converter</h2>
 
     <div class="views-stack">
@@ -716,7 +769,7 @@ function doFontConversion() {
   if (inputEncoding === outputEncoding) {
     ui.outputText.value = inputText;
     syncState(ui);
-    saveState(); // save on every change
+    saveState();
     return;
   }
 
@@ -746,7 +799,7 @@ function updateInputFont() {
   fonts.forEach(font => ui.inputText.classList.remove(`font-${font.id}`));
   ui.inputText.classList.add(`font-${ui.inputEncoding.value}`);
   doFontConversion();
-  saveState(); // save encoding change
+  saveState();
 }
 
 function updateOutputFont() {
@@ -754,7 +807,7 @@ function updateOutputFont() {
   fonts.forEach(font => ui.outputText.classList.remove(`font-${font.id}`));
   ui.outputText.classList.add(`font-${ui.outputEncoding.value}`);
   doFontConversion();
-  saveState(); // save encoding change
+  saveState();
 }
 
 function copyConverted() {
@@ -789,8 +842,6 @@ function attachEvents(prefix = '') {
     syncState(ui);
   });
 }
-
-// ---------- localStorage persistence ----------
 
 function saveState() {
   try {
@@ -839,8 +890,6 @@ function loadState() {
   }
 }
 
-// ---------- init ----------
-
 window.onload = function() {
   generateFontStyles();
   populateEncodingSelects();
@@ -848,13 +897,11 @@ window.onload = function() {
   attachEvents();
   attachEvents('mobile');
 
-  // Set default encodings (will be overridden by saved state if present)
   document.getElementById('input-encoding').value = 'unicode';
   document.getElementById('output-encoding').value = 'bamini';
   document.getElementById('input-encoding-mobile').value = 'unicode';
   document.getElementById('output-encoding-mobile').value = 'bamini';
 
-  // Set default font sizes
   document.getElementById('font-size-input').value = '15';
   document.getElementById('font-size-output').value = '15';
   document.getElementById('font-size-input-mobile').value = '15';
@@ -865,10 +912,8 @@ window.onload = function() {
   document.getElementById('input-text-mobile').style.fontSize = '15px';
   document.getElementById('output-text-mobile').style.fontSize = '15px';
 
-  // Load previously saved text and encodings (including Vanavil)
   loadState();
 
-  // Apply fonts and run initial conversion with loaded values
   updateInputFont();
   updateOutputFont();
 
