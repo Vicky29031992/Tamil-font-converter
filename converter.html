@@ -44,6 +44,10 @@
     gap: 10px;
   }
 
+  .desktop-view.show {
+    display: flex;
+  }
+
   .desktop-view h2 {
     color: #4b0082;
     text-align: center;
@@ -147,6 +151,10 @@
     font-size: 14px;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .mobile-view.show {
+    display: flex;
   }
 
   .mobile-view label,
@@ -324,14 +332,14 @@
   .desktop-view { display: flex; }
   .mobile-view { display: none; }
 
-  /* Mobile view for screens 768px and below */
-  @media (max-width: 768px) {
+  /* Mobile portrait view - full screen, top-bottom layout (increased breakpoint to 1024px for Surface Pro) */
+  @media (max-width: 1024px) and (orientation: portrait) {
     .app-shell {
       height: 100dvh;
       overflow: hidden;
     }
 
-    .desktop-view { display: none; }
+    .desktop-view { display: none !important; }
     .mobile-view {
       display: flex;
       height: 100dvh;
@@ -354,40 +362,27 @@
     }
   }
 
-  /* Landscape mobile - allow vertical scrolling */
-  @media (max-width: 768px) and (orientation: landscape) {
+  /* Mobile landscape view - DESKTOP layout (left-right boxes), content extends beyond screen (exact copy from original) */
+  @media (max-width: 1024px) and (orientation: landscape) {
     .app-shell {
       height: auto;
       min-height: 100dvh;
       overflow: visible;
     }
 
-    .mobile-view {
+    .desktop-view {
+      display: flex !important;
       height: auto;
       min-height: 100dvh;
       overflow-y: auto;
       overflow-x: hidden;
     }
 
-    .mobile-view .views-stack {
-      flex: none;
-      min-height: auto;
-    }
-
-    .mobile-view .box {
-      flex: none;
-      min-height: 200px;
-      height: auto;
-    }
-
-    .mobile-view textarea {
-      min-height: 150px;
-      flex: none;
-    }
+    .mobile-view { display: none !important; }
   }
 
   /* Desktop styling for larger screens */
-  @media (min-width: 769px) and (pointer: fine) {
+  @media (min-width: 1025px) {
     html, body {
       height: 100%;
       overflow: hidden;
@@ -420,7 +415,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) and (orientation: portrait) {
     .mobile-view {
       padding: 8px;
     }
@@ -452,7 +447,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 480px) and (orientation: portrait) {
     .mobile-view {
       padding: 6px;
       gap: 6px;
@@ -480,7 +475,7 @@
 </head>
 <body>
 <div class="app-shell">
-  <div class="desktop-view">
+  <div class="desktop-view" id="desktop-view">
     <div class="header-row">
       <div class="header-left">
         <a href="index.html" class="back-btn">Back to Home</a>
@@ -560,7 +555,7 @@
     <div class="note">For Queries whatsapp: 8015233838</div>
   </div>
 
-  <div class="mobile-view">
+  <div class="mobile-view" id="mobile-view">
     <div class="mobile-header">
       <div class="back-button-container">
         <a href="index.html" class="back-btn">Back to Home</a>
@@ -674,7 +669,7 @@ const LS_KEYS = {
 };
 
 function currentIds() {
-  const mobile = window.matchMedia('(max-width: 768px)').matches;
+  const mobile = window.matchMedia('(max-width: 1024px) and (orientation: portrait)').matches;
   return mobile ? {
     inputText: 'input-text-mobile',
     outputText: 'output-text-mobile',
