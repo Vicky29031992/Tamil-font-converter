@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tamil Font Converter</title>
+<style>
+  /* ========== DESKTOP CSS ========== */
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    margin: auto;
+    padding: 12px 10px 10px 10px;
+    font-size: 12px;
+    background: #f4f0fa;
+    color: #2e1a47;
+    position: relative;
+  }
+
+  /* Header row wrapper */
+  .header-row {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 8px auto;
+    height: 36px; /* fixed height so button and title share same baseline */
+  }
+
+  /* Back to home button - desktop: top-left, aligned with title */
+  .back-home-btn {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background: #6a0dad;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .back-home-btn:hover {
+    background: #5a0080;
+  }
+
+  h2 {
+    color: #4b0082;
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    display: block;
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  label, .font-label {
+    font-weight: bold;
+    font-size: 12px;
+    color: #3d1265;
+  }
+  select {
+    font-size: 11px;
+    padding: 2px 4px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+  .container {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .box {
+    flex: 1;
+    background: #fff;
+    border: 2px solid #c7aef3;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+  }
+  textarea {
+    width: 100%;
+    height: 465px;
+    margin-top: 8px;
+    font-size: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #b79ddb;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  .copy-btn, .clear-btn {
+    margin-top: 10px;
+    align-self: flex-end;
+    background: #6a0dad;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .copy-btn:hover, .clear-btn:hover {
+    background: #5a0080;
+  }
+  .note {
+    color: #4b0082;
+    padding-top: 10px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .font-size-group {
+    display: flex;
+    align-items: center;
+  }
+  .font-label {
+    margin-right: 4px;
+  }
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .encoding-select {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ========== MOBILE CSS ========== */
+  @media (max-width: 480px) {
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      font-size: 14px;
+      background: #f4f0fa;
+      color: #2e1a47;
+    }
+
+    /* Mobile: back button above title, left-aligned */
+    .header-row {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      position: static;
+      height: auto;
+    }
+
+    .back-home-btn {
+      position: static;
+      transform: none;
+      display: inline-block;
+      background: #6a0dad;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      color: #4b0082;
+      text-align: center;
+      margin: 8px 0 12px 0;
+      font-size: 20px;
+      display: block;
+      position: static;
+      transform: none;
+      width: auto;
+    }
+
+    label, .font-label {
+      font-weight: bold;
+      font-size: 13px;
+      color: #3d1265;
+    }
+    select {
+      font-size: 13px;
+      padding: 5px 8px;
+      margin-left: 4px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #b79ddb;
+    }
+    .container {
+      display: block;
+    }
+    .box {
+      background: #fff;
+      border: 2px solid #c7aef3;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .encoding-select {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .font-size-group {
+      display: flex;
+      align-items: center;
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
+      font-size: 14px;
+      padding: 10px;
+      border: 1px solid #b79ddb;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    .copy-btn, .clear-btn {
+      margin-top: 10px;
+      align-self: flex-end;
+      background: #6a0dad;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .copy-btn:hover, .clear-btn:hover {
+      background: #5a0080;
+    }
+    .note {
+      color: #4b0082;
+      padding-top: 0;
+      margin-top: 0;
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 6px 0 10px 0;
+    }
+    .top-row {
+      flex-wrap: wrap;
+    }
+    .encoding-select, .font-size-group {
+      flex: 1;
+    }
+    textarea {
+      height: 250px;
+      font-size: 14px;
+    }
+    .copy-btn, .clear-btn {
+      width: 100%;
+      align-self: center;
+      padding: 10px 20px;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    body {
+      padding: 6px;
+    }
+    textarea {
+      height: 220px;
+    }
+    select {
+      font-size: 12px;
+      padding: 4px 6px;
+    }
+    .font-label {
+      font-size: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header row: back button + title -->
+<div class="header-row">
+  <a href="index.html" class="back-home-btn">Back to Home</a>
+  <h2>Tamil Font Converter</h2>
+</div>
+
+<div class="container">
+  <div class="box">
+    <div class="label-row">
+      <label for="input-text">Input Text:</label>
+      <div class="encoding-select">
+        <span class="font-label">Encoding:</span>
+        <select id="input-encoding"></select>
+      </div>
+      <div class="font-size-group">
+        <span class="font-label">Font size:</span>
+        <select id="font-size-input">
+          <option value="15" selected>15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+    </div>
+    <textarea id="input-text"></textarea>
+    <button class="clear-btn" onclick="clearInputText()">Clear Text</button>
+  </div>
+
+  <div class="box">
+    <div class="label-row">
+      <label for="output-text">Output Text:</label>
+      <div class="encoding-select">
+        <span class="font-label">Encoding:</span>
+        <select id="output-encoding"></select>
+      </div>
+      <div class="font-size-group">
+        <span class="font-label">Font size:</span>
+        <select id="font-size-output">
+          <option value="15" selected>15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+    </div>
+    <textarea id="output-text"></textarea>
+    <button class="copy-btn" onclick="copyConverted()">Copy Converted Text</button>
+  </div>
+</div>
+
+<div class="note">
+  ⚡ Output text updates instantly as you type or paste.
+  For Queries Whatsapp: 8015233838 or mail:vigneshwaran29031992@gmail.com
+</div>
+
+<script src="mappings/bamini_to_unicode.js"></script>
+<script src="mappings/vanavil_to_unicode.js"></script>
+<script src="mappings/sathayam_to_unicode.js"></script>
+<script src="mappings/anankuhelv_to_unicode.js"></script>
+
+<script>
+const fonts = [
+  { id: 'unicode', name: 'Unicode', fontFile: 'Tamil Sangam MN' },
+  { id: 'bamini', name: 'Bamini', fontFile: 'bamini' },
+  { id: 'vanavil', name: 'Vanavil', fontFile: 'VANAVIL-Avvaiyar' },
+  { id: 'sathayam', name: 'Sathayam', fontFile: 'SATHAYAM' },
+  { id: 'anankuhelv', name: 'Ananku Helv', fontFile: 'Ananku Helv' }
+];
+
+const baseMappings = {
+  bamini: typeof bamini_to_unicode !== 'undefined' ? bamini_to_unicode : null,
+  vanavil: typeof vanavil_to_unicode !== 'undefined' ? vanavil_to_unicode : null,
+  sathayam: typeof sathayam_to_unicode !== 'undefined' ? sathayam_to_unicode : null,
+  anankuhelv: typeof anankuhelv_to_unicode !== 'undefined' ? anankuhelv_to_unicode : null
+};
+
+let mappings = {};
+
+function generateFontStyles() {
+  let styleContent = '';
+  
+  styleContent += `
+@font-face {
+  font-family: 'ForcedTamilUnicode';
+  src: url('font/Tamil Sangam MN.ttf') format('truetype');
+  unicode-range: U+0B80-0BFF;
+  font-weight: normal;
+  font-style: normal;
+}
+
+textarea {
+  font-family: 'ForcedTamilUnicode', 'Tamil Sangam MN', Arial, sans-serif !important;
+}
+`;
+
+  fonts.forEach(font => {
+    const fontName = font.fontFile + 'Font';
+    
+    if (font.id !== 'unicode') {
+      styleContent += `
+@font-face {
+  font-family: '${fontName}';
+  src: url('font/${font.fontFile}.ttf') format('truetype'),
+       url('font/${font.fontFile}.woff') format('woff'),
+       url('font/${font.fontFile}.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+`;
+    }
+    
+    if (font.id === 'unicode') {
+      styleContent += `
+.font-unicode {
+  font-family: 'ForcedTamilUnicode', 'Tamil Sangam MN', Arial, sans-serif !important;
+}
+`;
+    } else {
+      styleContent += `
+.font-${font.id} {
+  font-family: '${fontName}', 'ForcedTamilUnicode', 'Arial Unicode MS', Arial, sans-serif !important;
+}
+`;
+    }
+  });
+  
+  const styleTag = document.createElement('style');
+  styleTag.textContent = styleContent;
+  document.head.appendChild(styleTag);
+}
+
+function populateEncodingSelects() {
+  const inputSelect = document.getElementById('input-encoding');
+  const outputSelect = document.getElementById('output-encoding');
+  fonts.forEach(font => {
+    const option1 = document.createElement('option');
+    option1.value = font.id;
+    option1.textContent = font.name;
+    inputSelect.appendChild(option1);
+
+    const option2 = document.createElement('option');
+    option2.value = font.id;
+    option2.textContent = font.name;
+    outputSelect.appendChild(option2);
+  });
+}
+
+function flipMapping(mapping) {
+  const flipped = {};
+  if (!mapping) return flipped;
+  for (const [key, value] of Object.entries(mapping)) {
+    if (!flipped[value]) {
+      flipped[value] = key;
+    }
+  }
+  return flipped;
+}
+
+function chainMapping(map1, map2) {
+  const chained = {};
+  if (!map1 || !map2) return chained;
+  for (const [key, value] of Object.entries(map1)) {
+    if (Object.prototype.hasOwnProperty.call(map2, value)) {
+      chained[key] = map2[value];
+    }
+  }
+  return chained;
+}
+
+function createPattern(mapping) {
+  const keys = Object.keys(mapping).sort((a, b) => b.length - a.length);
+  if (keys.length === 0) return null;
+  const escapedKeys = keys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return new RegExp(escapedKeys.join('|'), 'g');
+}
+
+function buildAllMappings() {
+  mappings = {};
+
+  const available = {};
+  Object.keys(baseMappings).forEach(id => {
+    if (baseMappings[id]) available[id] = baseMappings[id];
+  });
+
+  const ids = Object.keys(available);
+
+  ids.forEach(from => {
+    mappings[`${from}_to_unicode`] = available[from];
+    mappings[`unicode_to_${from}`] = flipMapping(available[from]);
+  });
+
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = 0; j < ids.length; j++) {
+      if (i === j) continue;
+      const from = ids[i];
+      const to = ids[j];
+      const key = `${from}_to_${to}`;
+      if (available[from] && available[to]) {
+        mappings[key] = chainMapping(available[from], flipMapping(available[to]));
+      }
+    }
+  }
+
+  console.log('Mappings loaded:', Object.keys(mappings).length);
+}
+
+function doFontConversion() {
+  const inputText = document.getElementById('input-text').value;
+  const inputEncoding = document.getElementById('input-encoding').value;
+  const outputEncoding = document.getElementById('output-encoding').value;
+
+  if (inputEncoding === outputEncoding) {
+    document.getElementById('output-text').value = inputText;
+    return;
+  }
+
+  const mapping = mappings[`${inputEncoding}_to_${outputEncoding}`];
+  if (!mapping || Object.keys(mapping).length === 0) {
+    document.getElementById('output-text').value = inputText;
+    return;
+  }
+
+  const pattern = createPattern(mapping);
+  if (!pattern) {
+    document.getElementById('output-text').value = inputText;
+    return;
+  }
+
+  document.getElementById('output-text').value = inputText.replace(pattern, match => mapping[match] || match);
+}
+
+function updateInputFont() {
+  const encoding = document.getElementById('input-encoding').value;
+  const textarea = document.getElementById('input-text');
+  fonts.forEach(font => textarea.classList.remove(`font-${font.id}`));
+  textarea.classList.add(`font-${encoding}`);
+
+  try {
+    localStorage.setItem('tamilConverter_inputEncoding', encoding);
+  } catch (e) {}
+
+  doFontConversion();
+}
+
+function updateOutputFont() {
+  const encoding = document.getElementById('output-encoding').value;
+  const textarea = document.getElementById('output-text');
+  fonts.forEach(font => textarea.classList.remove(`font-${font.id}`));
+  textarea.classList.add(`font-${encoding}`);
+
+  try {
+    localStorage.setItem('tamilConverter_outputEncoding', encoding);
+  } catch (e) {}
+
+  doFontConversion();
+}
+
+document.getElementById('input-text').addEventListener('input', doFontConversion);
+document.getElementById('input-encoding').addEventListener('change', updateInputFont);
+document.getElementById('output-encoding').addEventListener('change', updateOutputFont);
+
+function copyConverted() {
+  const outputBox = document.getElementById('output-text');
+  outputBox.select();
+  document.execCommand('copy');
+  alert("Converted text copied!");
+}
+
+function clearInputText() {
+  document.getElementById('input-text').value = '';
+  document.getElementById('output-text').value = '';
+  doFontConversion();
+}
+
+document.getElementById('font-size-input').addEventListener('change', function() {
+  document.getElementById('input-text').style.fontSize = this.value + "px";
+  try {
+    localStorage.setItem('tamilConverter_inputFontSize', this.value);
+  } catch (e) {}
+});
+
+document.getElementById('font-size-output').addEventListener('change', function() {
+  document.getElementById('output-text').style.fontSize = this.value + "px";
+  try {
+    localStorage.setItem('tamilConverter_outputFontSize', this.value);
+  } catch (e) {}
+});
+
+window.onload = function() {
+  generateFontStyles();
+  populateEncodingSelects();
+
+  const savedInputFontSize = localStorage.getItem('tamilConverter_inputFontSize');
+  const savedOutputFontSize = localStorage.getItem('tamilConverter_outputFontSize');
+
+  const inputFontSize = savedInputFontSize || '15';
+  const outputFontSize = savedOutputFontSize || '15';
+
+  document.getElementById('input-text').style.fontSize = inputFontSize + "px";
+  document.getElementById('output-text').style.fontSize = outputFontSize + "px";
+  document.getElementById('font-size-input').value = inputFontSize;
+  document.getElementById('font-size-output').value = outputFontSize;
+
+  const savedInputEncoding = localStorage.getItem('tamilConverter_inputEncoding');
+  const savedOutputEncoding = localStorage.getItem('tamilConverter_outputEncoding');
+
+  const inputEncoding = savedInputEncoding || 'unicode';
+  const outputEncoding = savedOutputEncoding || 'bamini';
+
+  document.getElementById('input-encoding').value = inputEncoding;
+  document.getElementById('output-encoding').value = outputEncoding;
+
+  buildAllMappings();
+
+  updateInputFont();
+  updateOutputFont();
+};
+</script>
+
+</body>
+</html>
