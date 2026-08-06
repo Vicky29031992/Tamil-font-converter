@@ -4,10 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tamil Font Converter</title>
+
+<!-- Inter font from Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   /* ========== DESKTOP CSS ========== */
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     max-width: 100%;
     margin: auto;
     padding: 12px 10px 10px 10px;
@@ -23,10 +29,9 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto 8px auto;
-    height: 36px; /* fixed height so button and title share same baseline */
+    height: 36px;
   }
 
-  /* Back to home button - desktop: top-left, aligned with title */
   .back-home-btn {
     position: absolute;
     top: 50%;
@@ -42,6 +47,7 @@
     text-decoration: none;
     white-space: nowrap;
     line-height: 1;
+    font-family: 'Inter', Arial, sans-serif;
   }
   .back-home-btn:hover {
     background: #5a0080;
@@ -59,18 +65,21 @@
     top: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;
+    font-family: 'Inter', Arial, sans-serif;
   }
 
   label, .font-label {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 12px;
     color: #3d1265;
+    font-family: 'Inter', Arial, sans-serif;
   }
   select {
     font-size: 11px;
     padding: 2px 4px;
     margin-left: 2px;
     cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif;
   }
   .container {
     display: flex;
@@ -96,6 +105,7 @@
     border: 1px solid #b79ddb;
     border-radius: 4px;
     resize: vertical;
+    font-family: 'ForcedTamilUnicode', 'Tamil Sangam MN', Arial, sans-serif !important;
   }
   .copy-btn, .clear-btn {
     margin-top: 10px;
@@ -107,6 +117,7 @@
     font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif;
   }
   .copy-btn:hover, .clear-btn:hover {
     background: #5a0080;
@@ -116,6 +127,7 @@
     padding-top: 10px;
     font-size: 12px;
     text-align: center;
+    font-family: 'Inter', Arial, sans-serif;
   }
   .font-size-group {
     display: flex;
@@ -140,7 +152,7 @@
   /* ========== MOBILE CSS ========== */
   @media (max-width: 480px) {
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       padding: 10px;
       font-size: 14px;
@@ -148,7 +160,6 @@
       color: #2e1a47;
     }
 
-    /* Mobile: back button above title, left-aligned */
     .header-row {
       display: block;
       text-align: left;
@@ -171,6 +182,7 @@
       text-decoration: none;
       margin-right: 0;
       margin-bottom: 8px;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
     h2 {
@@ -182,12 +194,14 @@
       position: static;
       transform: none;
       width: auto;
+      font-family: 'Inter', Arial, sans-serif;
     }
 
     label, .font-label {
-      font-weight: bold;
+      font-weight: 600;
       font-size: 13px;
       color: #3d1265;
+      font-family: 'Inter', Arial, sans-serif;
     }
     select {
       font-size: 13px;
@@ -196,6 +210,7 @@
       cursor: pointer;
       border-radius: 4px;
       border: 1px solid #b79ddb;
+      font-family: 'Inter', Arial, sans-serif;
     }
     .container {
       display: block;
@@ -241,6 +256,7 @@
       border: 1px solid #b79ddb;
       border-radius: 4px;
       resize: vertical;
+      font-family: 'ForcedTamilUnicode', 'Tamil Sangam MN', Arial, sans-serif !important;
     }
     .copy-btn, .clear-btn {
       margin-top: 10px;
@@ -252,6 +268,7 @@
       font-size: 13px;
       border-radius: 4px;
       cursor: pointer;
+      font-family: 'Inter', Arial, sans-serif;
     }
     .copy-btn:hover, .clear-btn:hover {
       background: #5a0080;
@@ -262,6 +279,7 @@
       margin-top: 0;
       font-size: 13px;
       text-align: center;
+      font-family: 'Inter', Arial, sans-serif;
     }
   }
   
@@ -385,7 +403,7 @@
 
 <div class="note">
   ⚡ Output text updates instantly as you type or paste.
-  For any Feedback and Queries Whatsapp: 8015233838 or mail: vigneshwaran29031992@gmail.com
+  For any Feedback and Queries Whatsapp: 8015233838 or mail: vigneshwaran29031992@gmail.com</a>
 </div>
 
 <script src="mappings/bamini_to_unicode.js"></script>
@@ -421,10 +439,6 @@ function generateFontStyles() {
   unicode-range: U+0B80-0BFF;
   font-weight: normal;
   font-style: normal;
-}
-
-textarea {
-  font-family: 'ForcedTamilUnicode', 'Tamil Sangam MN', Arial, sans-serif !important;
 }
 `;
 
