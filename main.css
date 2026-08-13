@@ -1,0 +1,193 @@
+/* Font Face from unicode_to_srtamil */
+@font-face {
+  font-family: stmzh;
+  src: url(fonts/stmzh.ttf);
+}
+
+/* Root variables */
+:root {
+  --font-body: "DM Sans", sans-serif;
+  --color-heading: #170006;
+  --color-white: #fff;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 15px 0;
+  background: #f4f0fa;
+  color: #2e1a47;
+}
+
+/* Header row styles */
+.header-row {
+  position: relative;
+  width: 100%;
+  margin: 0 auto 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Universal Action Button Style */
+.back-home-btn, 
+.thm-btn-custom {
+  background: #6a0dad !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  font-family: 'Inter', Arial, sans-serif !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: background 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+/* Reduced top margin for action buttons below textareas */
+.thm-btn-custom {
+  margin-top: 5px !important;
+}
+
+.back-home-btn {
+  margin-top: 0 !important;
+}
+
+.back-home-btn:hover, 
+.thm-btn-custom:hover {
+  background: #5a0080 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+h2 {
+  color: var(--color-heading);
+  text-align: center;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Reduced padding inside card to pull bottom button closer */
+.contact_iconbox {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px 15px 10px 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.output {
+  font-family: stmzh, 'Inter', sans-serif;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 0px;
+}
+
+/* Textarea Sizing & Auto-zoom Prevention on Mobile */
+.form-group textarea.form-control1, 
+.form-group textarea.form-control2 {
+  min-height: 500px;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #a5a3a3;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent automatic iOS/Android page zooming when selecting textareas */
+.form-group textarea.form-control1:focus, 
+.form-group textarea.form-control2:focus {
+  font-size: 16px !important;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+label, .font-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--color-heading);
+}
+
+select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #a5a3a3;
+  cursor: pointer;
+}
+
+.encoding-select, .font-size-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button-wrapper {
+  text-align: right;
+}
+
+.note {
+  color: var(--color-heading);
+  padding-top: 15px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Custom Layout & Responsive Adjustments */
+@media (min-width: 992px) {
+  .container {
+    max-width: 98% !important;
+    width: 100% !important;
+  }
+}
+
+textarea::placeholder {
+  font-family: 'Inter', Arial, sans-serif !important;
+}
+
+@media (max-width: 991px) {
+  .col-lg-6 {
+    margin-bottom: 30px; 
+  }
+  .col-lg-6:last-child {
+    margin-bottom: 0; 
+  }
+}
+
+/* Mobile Layout Alignment */
+@media (max-width: 768px) {
+  .button-wrapper {
+    text-align: right;
+  }
+  
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header-row h2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .header-row .spacer {
+    display: none;
+  }
+}
