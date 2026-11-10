@@ -206,6 +206,7 @@
   <script src="mappings/anankuhelv_to_unicode.js"></script>
   <script src="mappings/stmzh_adobe_old_to_unicode.js"></script>
   <script src="mappings/stmzh_adobe_new_to_unicode.js"></script>
+  <script src="mappings/divya_to_unicode.js"></script>
   
   <script>
     const fonts = [
@@ -215,7 +216,8 @@
       { id: 'sathayam', name: 'Sathayam', fontFile: 'SATHAYAM' },
       { id: 'anankuhelv', name: 'Ananku Helv', fontFile: 'Ananku Helv' },
 	  { id: 'stmzh_adobe_old', name: 'Stmzh(Adobe Old)', fontFile: 'STMZH-076' },
-	  { id: 'stmzh_adobe_new', name: 'Stmzh(Adobe New)', fontFile: 'STMZH-076' }
+	  { id: 'stmzh_adobe_new', name: 'Stmzh(Adobe New)', fontFile: 'STMZH-076' },
+	  { id: 'divya', name: 'Divya', fontFile: 'divya' }
     ];
 
     const baseMappings = {
@@ -224,7 +226,8 @@
       sathayam: typeof sathayam_to_unicode !== 'undefined' ? sathayam_to_unicode : null,
       anankuhelv: typeof anankuhelv_to_unicode !== 'undefined' ? anankuhelv_to_unicode : null,
 	  stmzh_adobe_old: typeof stmzh_adobe_old_to_unicode !== 'undefined' ? stmzh_adobe_old_to_unicode : null,
-	  stmzh_adobe_new: typeof stmzh_adobe_new_to_unicode !== 'undefined' ? stmzh_adobe_new_to_unicode : null
+	  stmzh_adobe_new: typeof stmzh_adobe_new_to_unicode !== 'undefined' ? stmzh_adobe_new_to_unicode : null,
+	  divya: typeof divya_to_unicode !== 'undefined' ? divya_to_unicode : null,
     };
 
     let mappings = {};
