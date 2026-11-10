@@ -99,6 +99,7 @@ const sathayam_to_unicode = {
 "yp": "லி",
 "tp": "வி",
 "Hp": "ழி",
+"sp": "ளி",
 "wp": "றி",
 "dp": "னி",
 "]p": "ஸி",
